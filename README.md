@@ -17,14 +17,6 @@
 
 ---
 
-## 模块文件
-
-```
-proxmox_custom/
-├── proxmox_custom.php      # 主模块逻辑
-├── clientarea.tpl           # 客户区模板（深色主题 + 图表）
-└── console-login.html       # 控制台认证辅助文件（仅VNC需要）
-```
 
 ---
 
