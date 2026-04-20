@@ -149,7 +149,7 @@
                 <div class="pve-gauge-bar"><div class="pve-gauge-fill cpu" style="width:{$cpuUsage}%"></div></div>
             </div>
             <div class="pve-stat-card">
-                <div class="pve-stat-label">RAM Usage</div>
+                <div class="pve-stat-label">内存使用率</div>
                 <div class="pve-stat-value ram">{$ramUsage} <span style="font-size:14px;opacity:0.6">/ {$ramTotal} MB</span></div>
                 {if $ramTotal > 0}
                     <div class="pve-gauge-bar"><div class="pve-gauge-fill ram" style="width:{$ramUsage / $ramTotal * 100}%"></div></div>
@@ -203,10 +203,11 @@
             </a>
             {if $consoleEnabled}
             <a href="clientarea.php?action=productdetails&id={$serviceid}&modop=custom&a=Console"
-               class="pve-btn pve-btn-console"
-               onclick="window.open(this.href, 'pve_console', 'width=1024,height=768,resizable=yes,scrollbars=no'); return false;">
-                <i class="fas fa-desktop"></i> 控制台
-            </a>
+   target="_blank"
+   rel="noopener noreferrer"
+   class="pve-btn pve-btn-console">
+    <i class="fas fa-desktop"></i> 控制台
+</a>
             {/if}
         </div>
     </div>
