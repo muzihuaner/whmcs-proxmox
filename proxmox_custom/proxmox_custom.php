@@ -21,42 +21,44 @@ function proxmox_custom_MetaData()
 function proxmox_custom_ConfigOptions()
 {
     return [
-        '模板ID' => [
+        'TemplateID' => [
             'Type' => 'text',
             'Size' => '5',
-            'Default' => '100',
-            'Description' => '要克隆的模板VM的VMID',
+            'Default' => '1000',
+            'Description' => 'The VMID of the template VM to clone',
         ],
-        '节点' => [
+        'Node' => [
             'Type' => 'text',
             'Size' => '20',
             'Default' => 'proxmox-node',
-            'Description' => 'Proxmox节点名称',
+            'Description' => 'The Proxmox node name',
         ],
-        'CPU核心数' => [
+        // CPU Cores
+        'CPUCores' => [
             'Type' => 'dropdown',
             'Options' => [
-                '1' => '1 核',
-                '2' => '2 核',
-                '4' => '4 核',
-                '8' => '8 核',
+                '1' => '1 Core',
+                '2' => '2 Cores',
+                '4' => '4 Cores',
+                '8' => '8 Cores',
             ],
             'Default' => '2',
-            'Description' => 'CPU核心数量',
+            'Description' => 'Number of CPU cores',
         ],
-        '内存大小' => [
+        // RAM
+        'RAM' => [
             'Type' => 'dropdown',
             'Options' => [
-                '1' => '1 GB',
                 '2' => '2 GB',
                 '4' => '4 GB',
                 '8' => '8 GB',
                 '16' => '16 GB',
             ],
             'Default' => '2',
-            'Description' => '内存大小(GB)',
+            'Description' => 'Amount of RAM in GB',
         ],
-        '磁盘大小' => [
+        // Disk Size
+        'DiskSize' => [
             'Type' => 'dropdown',
             'Options' => [
                 '20' => '20 GB',
@@ -65,9 +67,9 @@ function proxmox_custom_ConfigOptions()
                 '160' => '160 GB',
             ],
             'Default' => '20',
-            'Description' => '磁盘大小(GB)',
+            'Description' => 'Disk size in GB',
         ],
-        '网络带宽' => [
+        'NetworkSpeed' => [
             'Type' => 'dropdown',
             'Options' => [
                 '10'    => '10 Mbps',
@@ -77,20 +79,21 @@ function proxmox_custom_ConfigOptions()
                 '1000' => '1 Gbps',
             ],
             'Default' => '20',
-            'Description' => '网络带宽(Mbps)',
+            'Description' => 'Network speed in Mbps',
         ],
-        '启用控制台' => [
+        'EnableConsole' => [
             'Type' => 'yesno',
-            'Description' => '允许客户从客户区访问VM控制台',
+            'Description' => 'Allow clients to access the VM console from the client area',
         ],
-        '主机名后缀' => [
+        'HostnameSuffix' => [
             'Type' => 'text',
             'Size' => '30',
             'Default' => '.vps.example.com',
-            'Description' => 'VM主机名后缀，例如 .vps.example.com',
+            'Description' => 'Hostname suffix for VMs, e.g. .vps.example.com',
         ],
     ];
 }
+
 
 function proxmox_custom_TestConnection(array $params)
 {
@@ -524,7 +527,7 @@ function proxmox_custom_startCloneVM($hostname, $apiTokenID, $apiTokenSecret, $n
         CURLOPT_SSL_VERIFYPEER => false, // 根据环境安全性决定是否开启
         CURLOPT_SSL_VERIFYHOST => false,
         CURLOPT_HTTPHEADER     => $headers,
-        CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_0, // 强制使用 HTTP/1.0 以避免 chunked encoding
+        CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_0, // 强制使用 HTTP 1.1
         CURLOPT_TIMEOUT        => 30,
         CURLOPT_CONNECTTIMEOUT => 10,
     ]);
